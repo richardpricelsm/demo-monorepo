@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "projects": {
+    "sfb": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/sfb",
+      "sourceRoot": "apps/sfb/src",
+      "prefix": "pup-mono",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/sfb",
+            "index": "apps/sfb/src/index.html",
+            "main": "apps/sfb/src/main.ts",
+            "polyfills": "apps/sfb/src/polyfills.ts",
+            "tsConfig": "apps/sfb/tsconfig.app.json",
+            "aot": false,
+            "assets": ["apps/sfb/src/favicon.ico", "apps/sfb/src/assets"],
+            "styles": ["apps/sfb/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/sfb/src/environments/environment.ts",
+                  "with": "apps/sfb/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "sfb:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sfb:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sfb:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/sfb/tsconfig.app.json",
+              "apps/sfb/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/sfb/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/sfb/jest.config.js",
+            "tsConfig": "apps/sfb/tsconfig.spec.json",
+            "setupFile": "apps/sfb/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "sfb-e2e": {
+      "root": "apps/sfb-e2e",
+      "sourceRoot": "apps/sfb-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/sfb-e2e/cypress.json",
+            "tsConfig": "apps/sfb-e2e/tsconfig.e2e.json",
+            "devServerTarget": "sfb:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sfb:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/sfb-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/sfb-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "sfb"
+}
