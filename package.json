@@ -47,7 +47,7 @@
     "reflect-metadata": "^0.1.12"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.800.1",
+    "@angular-devkit/build-angular": "^15.0.0",
     "@angular/cli": "8.1.1",
     "@angular/compiler-cli": "^8.0.0",
     "@angular/language-service": "^8.0.0",
@@ -55,8 +55,8 @@
     "@nestjs/testing": "^6.2.4",
     "@nrwl/cypress": "8.4.13",
     "@nrwl/jest": "8.4.13",
-    "@nrwl/nest": "8.4.13",
-    "@nrwl/node": "8.4.13",
+    "@nrwl/nest": "8.12.11",
+    "@nrwl/node": "8.12.11",
     "@nrwl/workspace": "8.4.13",
     "@types/jest": "24.0.9",
     "@types/node": "~8.9.4",
